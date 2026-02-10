@@ -1,0 +1,98 @@
+version: "3.9"
+
+services:
+  # ==================== MySQL ====================
+  mysql:
+    image: mysql:8.0
+    container_name: evernight-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: evernight^*#483956
+      MYSQL_DATABASE: evernight
+      MYSQL_USER: evernight
+      MYSQL_PASSWORD: evernight^*#483956
+      TZ: Asia/Shanghai
+    # 生产环境不建议对外暴露 MySQL
+    # ports:
+    #   - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    networks:
+      - evernight-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pevernight^*#483956"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== Redis ====================
+  redis:
+    image: redis:7.0-alpine
+    container_name: evernight-redis
+    restart: always
+    # 生产环境不建议对外暴露 Redis
+    # ports:
+    #   - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - evernight-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # ==================== Spring Boot 后端 ====================
+  backend:
+    build: ./backend
+    container_name: evernight-backend
+    restart: always
+    # 生产环境不建议直接暴露后端端口
+    # ports:
+    #   - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/evernight?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: evernight
+      SPRING_DATASOURCE_PASSWORD: evernight^*#483956
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      TZ: Asia/Shanghai
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_logs:/app/logs
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - evernight-network
+
+  # ==================== 前端 + Nginx ====================
+  frontend:
+    build: ./frontend
+    container_name: evernight-frontend
+    restart: always
+    ports:
+      - "7666:7666"
+    depends_on:
+      - backend
+    networks:
+      - evernight-network
+
+volumes:
+  mysql_data:
+  redis_data:
+  backend_uploads:
+  backend_logs:
+
+networks:
+  evernight-network:
+    driver: bridge
