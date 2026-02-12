@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS task_run_history (
   started_at DATETIME NOT NULL COMMENT '开始时间',
   finished_at DATETIME NULL COMMENT '结束时间',
   summary VARCHAR(255) NULL COMMENT '摘要',
-  detail MEDIUMTEXT NULL COMMENT '详情（文本/JSON）'
+  detail_json MEDIUMTEXT NULL COMMENT '详情（JSON/文本）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='任务运行历史';
 
 -- =============================================================================
