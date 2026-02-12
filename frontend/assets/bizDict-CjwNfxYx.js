@@ -1,1 +1,0 @@
-import{h as o}from"./index-8jM1g0LY.js";const e=new Map,i=async c=>{const t=String(c||"");if(!t)return[];if(e.has(t))return e.get(t);const n=o.get(`/api/system/biz-dicts/${encodeURIComponent(t)}/items`).then(a=>{var s;return((s=a.data)==null?void 0:s.data)||[]});e.set(t,n);try{return await n}catch(a){throw e.delete(t),a}};export{i as g};
