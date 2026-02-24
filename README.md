@@ -5,7 +5,8 @@
 
 ---
 
-![](img/EN.png)
+![img.png](imgs/login.png)
+![img.png](imgs/dashboard.png)
 
 ## 01｜行业痛点：资产可见≠可治理
 
