@@ -1,1 +1,0 @@
-import{T as s}from"./TaskList-B9vco16S.js";import{l as e,g as a}from"./index-B_daisLe.js";import"./bizDict-BAxCHm_n.js";const t='{"assetCodes":[]}',_={__name:"AssessTasks",setup(o){return(r,p)=>(a(),e(s,{"fixed-type":"ASSESS","default-params-json":t}))}};export{_ as default};

@@ -1,0 +1,1 @@
+import{T as a}from"./TaskList-DyPqjdyZ.js";import{l as s,g as t}from"./index-B6cbT4vm.js";import"./bizDict-CXmq2OlP.js";const e='{"scanKind":"PORT","ip":"1.1.1.1","ports":[80,443]}',i={__name:"ScanTasks",setup(o){return(r,p)=>(t(),s(a,{"fixed-type":"SCAN","default-params-json":e}))}};export{i as default};

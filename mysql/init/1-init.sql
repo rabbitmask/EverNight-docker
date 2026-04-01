@@ -374,17 +374,6 @@ INSERT INTO dict_meta (dict_code, dict_name, enabled, version, updated_by, updat
     ('high_risk_ports', '高危端口字典', 1, 'v1', 'system', NOW())
 ON DUPLICATE KEY UPDATE updated_at=VALUES(updated_at);
 
--- Seeds for dict_admin_path moved to sql/dict.sql
-
--- Seeds for dict_sensitive_path moved to sql/dict.sql
-
--- Seeds for dict_cdn_fingerprint moved to sql/dict.sql
-
--- Seeds for dict_common_port moved to sql/dict.sql
-
--- Seeds for dict_high_risk_port moved to sql/dict.sql
-
--- Seeds for dict_subdomain moved to sql/dict.sql
 
 INSERT INTO biz_dict_meta (dict_code, dict_name, enabled, remark, updated_by, created_at, updated_at)
 VALUES
@@ -399,8 +388,8 @@ ON DUPLICATE KEY UPDATE updated_at=VALUES(updated_at);
 
 INSERT INTO biz_dict_item (dict_code, item_code, item_name, sort_order, enabled, updated_by, created_at, updated_at)
 VALUES
-  ('ASSET_TYPE', 'WEB_APP', 'Web 应用', 10, 1, 'system', NOW(), NOW()),
-  ('ASSET_TYPE', 'API', 'API 接口', 20, 1, 'system', NOW(), NOW()),
+  ('ASSET_TYPE', 'WEB_APP', 'Web应用', 10, 1, 'system', NOW(), NOW()),
+  ('ASSET_TYPE', 'API', 'API接口', 20, 1, 'system', NOW(), NOW()),
   ('ASSET_TYPE', 'DOMAIN', '域名', 30, 1, 'system', NOW(), NOW()),
   ('ASSET_TYPE', 'IP', 'IP地址', 40, 1, 'system', NOW(), NOW()),
   ('ASSET_TYPE', 'DB', '数据库', 50, 1, 'system', NOW(), NOW()),

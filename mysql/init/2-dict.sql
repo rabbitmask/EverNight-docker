@@ -1,5 +1,5 @@
-﻿-- EverNight 扫描/字典数据（独立于 init.sql，便于维护）
--- 说明：本文件仅负责填充字典数据；建表请见 sql/init.sql
+﻿-- EverNight 扫描/字典数据（独立于 1-init.sql，便于维护）
+-- 说明：本文件仅负责填充字典数据；建表请见 sql/1-init.sql
 
 SET NAMES utf8mb4;
 USE evernight;
